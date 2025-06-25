@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    #navigation button {
+      padding: 4px 12px;
+      margin-right: 5px;
+      border: 1px solid #888;
+      background-color: #f2f2f2;
+      cursor: pointer;
+    }
+  
+    #navigation button.active {
+      background-color: #ccc;
+      box-shadow: inset 2px 2px 5px #aaa;
+      font-weight: bold;
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finance Tracker</title>
+  </head>
+  <body>
+    <h1>Finance Tracker</h1>
+    <hr />
+    <p id="message"></p>
+    <div id="navigation" style="display: none">
+      <button type="button" id="show-transactions">Transactions</button>
+      <button type="button" id="show-goals">Goals</button>
+    </div>
+    <hr />
+    <div id="logon-register" style="display: none">
+      <button type="button" id="logon">logon</button>
+      <button type="button" id="register">register</button>
+    </div>
+    <div id="logon-div" style="display: none">
+      <form>
+        <div>
+          <label for="email">email:</label> <input type="email" id="email" />
+        </div>
+        <div>
+          <label for="password">password:</label>
+          <input type="password" id="password" />
+        </div>
+        <button type="button" id="logon-button">logon</button>
+        <button type="button" id="logon-cancel">cancel</button>
+      </form>
+    </div>
+    <div id="register-div" style="display: none">
+      <form>
+        <div>
+          <label for="name">name:</label> <input type="text" id="name" />
+        </div>
+        <div>
+          <label for="email1">email:</label> <input type="email" id="email1" />
+        </div>
+        <div>
+          <label for="password1">password:</label>
+          <input type="password" id="password1" />
+        </div>
+        <div>
+          <label for="password2">verify password:</label>
+          <input type="password" id="password2" />
+        </div>
+        <button type="button" id="register-button">register</button>
+        <button type="button" id="register-cancel">cancel</button>
+      </form>
+    </div>
+
+    <div id="transactions" style="display: none">
+      <p id="transactions-message"></p>
+      <table id="transactions-table">
+        <thead>
+          <tr id="transactions-table-header">
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th colspan="2"></th>
+          </tr>
+          <tr id="transactions-filter-row">
+            <th><input type="text" id="filter-title" placeholder="Search title" /></th>
+            <th></th>
+            <th>
+              <select id="filter-type">
+                <option value="">All</option>
+              </select>
+            </th>
+            <th>
+              <select id="filter-category">
+                <option value="">All</option>
+              </select>
+            </th>            
+            <th></th>
+            <th colspan="2"></th>
+          </tr>                            
+        </thead>
+        <tbody>
+        </tbody>
+      </table>      
+
+      <p id="balance">Balance: $0.00</p>
+      
+      <button type="button" id="add-transaction">add transaction</button>
+      <button type="button" id="logoff">log off</button>
+    </div>
+
+    <div id="edit-transaction" style="display: none">
+      <form>
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" id="title" />
+        </div>
+        <div>
+          <label for="amount">Amount:</label>
+          <input type="number" id="amount" />
+        </div>
+        <div>
+          <label for="type">Type:</label>
+          <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+        <div id="income-category-group" style="display:none;">
+          <label for="incomeCategory">Income Category:</label>
+          <select id="incomeCategory">
+            <option value="salary">Salary</option>
+            <option value="bonus">Bonus</option>
+            <option value="freelance">Freelance</option>
+            <option value="investment return">Investment Return</option>
+            <option value="gift">Gift</option>
+            <option value="refund">Refund</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div id="expense-category-group" style="display:none;">
+          <label for="expenseCategory">Expense Category:</label>
+          <select id="expenseCategory">
+            <option value="rent">Rent</option>
+            <option value="groceries">Groceries</option>
+            <option value="utilities">Utilities</option>
+            <option value="transportation">Transportation</option>
+            <option value="dining out">Dining Out</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="health">Health</option>
+            <option value="insurance">Insurance</option>
+            <option value="education">Education</option>
+            <option value="shopping">Shopping</option>
+            <option value="subscriptions">Subscriptions</option>
+            <option value="travel">Travel</option>
+            <option value="debt">Debt</option>
+            <option value="personal care">Personal Care</option>
+            <option value="childcare">Childcare</option>
+            <option value="savings">Savings</option>
+            <option value="charity">Charity</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div id="savings-goal-group" style="display:none;">
+          <label for="savingsGoal">Choose Goal:</label>
+          <select id="savingsGoal">
+            <option value="">Select goal...</option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="date">Date:</label>
+          <input type="date" id="date" />
+        </div>
+        <button type="button" id="adding-transaction">add</button>
+        <button type="button" id="edit-cancel">cancel</button>
+      </form>
+    </div>
+
+    <div id="goals" style="display: none">
+      <p id="goals-message"></p>
+      <table id="goals-table">
+        <tr id="goals-table-header">
+          <th>Title</th>
+          <th>Target</th>
+          <th>Current</th>
+          <th>Monthly</th>
+          <th>Target Date</th>
+          <th>Progress</th>
+          <th colspan="2"></th>
+        </tr>
+        <tbody id="goals-table-body"></tbody>
+      </table>
+      <button type="button" id="add-goal">add goal</button>
+      <button type="button" id="logoff-goals">log off</button>
+    </div>    
+
+    <div id="edit-goal" style="display: none">
+      <form>
+        <div><label for="goal-title">Title:</label><input type="text" id="goal-title" /></div>
+        <div><label for="goal-targetAmount">Target Amount:</label><input type="number" id="goal-targetAmount" /></div>
+        <div><label for="currentAmount">Current Amount:</label><input type="number" id="currentAmount" /></div>
+        <div><label for="goal-monthlyContribution">Monthly Contribution:</label><input type="number" id="goal-monthlyContribution" /></div>
+        <div><label for="goal-targetDate">Target Date:</label><input type="date" id="goal-targetDate" /></div>
+        <button type="button" id="adding-goal">add</button>
+        <button type="button" id="edit-cancel-goal">cancel</button>
+      </form>
+    </div>
+
+    <script src="./index.js" type="module"></script>
+  </body>
+</html>
